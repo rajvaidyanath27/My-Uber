@@ -3,11 +3,26 @@ import { StyleSheet, Text, View } from 'react-native';
 import {Provider} from 'react-redux';
 import { store } from './store';
 import HomeScreen from './screens/HomeScreen'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import 'react-native-gesture-handler';
+import {NavigationContainer} from "@react-navigation/native";
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
+
   return (
     <Provider store={store}>
-      <HomeScreen/>
+      <NavigationContainer>
+        <SafeAreaProvider>
+          <Stack.Navigator>
+            <Stack.Screen
+                name='HomeScreen'
+                component={HomeScreen}
+            />
+          </Stack.Navigator>
+        </SafeAreaProvider>
+      </NavigationContainer>
     </Provider>
   );
 }
