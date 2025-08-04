@@ -1,11 +1,21 @@
 import React from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
+import { Text, View, SafeAreaView,Image } from 'react-native';
 import '../styles/global.css';
 
 const HomeScreen = () => {
   return (
-    <SafeAreaView className="flex-1 justify-center items-center">
-      <Text className="text-xl font-bold text-blue-500">I am the homescreen</Text>
+    <SafeAreaView className="bg-white h-full">
+      <View className='p-5 pt-10'>
+        <Image style={{
+          height: 100,
+          width: 100,
+          resizeMode: "contain"
+        }}
+           source={{
+            uri: "https:/upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/2560px-Uber_logo_2018.svg.png"
+           }}
+         />
+      </View>
     </SafeAreaView>
   );
 };
