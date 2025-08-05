@@ -17,6 +17,7 @@ import { Icon } from "react-native-elements";
 const NavigateCard = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
   return (
     <SafeAreaView className="bg-white flex-1">
       <Text className="text-center font-medium py-5 text-xl">Good Morning!</Text>
@@ -98,7 +99,7 @@ const NavigateCard = () => {
         />
         <NavFavourites />
       </View>
-       <View className="flex-row bg-white justify-evenly py-2 mt-auto border-top border-gray-100">
+      <View className="flex-row bg-white justify-evenly py-2 mt-auto border-top border-gray-100">
         <TouchableOpacity
           onPress={() => navigation.navigate("RideOptions")}
           className="flex flex-row bg-black w-24 px-4 py-3 rounded-full"
