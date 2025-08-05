@@ -1,3 +1,4 @@
+import 'react-native-get-random-values'; 
 import './styles/global.css';
 import { StyleSheet, Text, View } from 'react-native';
 import {Provider} from 'react-redux';

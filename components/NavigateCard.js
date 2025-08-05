@@ -1,39 +1,33 @@
-import 'react-native-get-random-values';
-import React from 'react';
-import { View, SafeAreaView, Image, Text } from 'react-native';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { GOOGLE_MAPS_APIKEY } from '@env';
-import { useDispatch } from 'react-redux';
-import { setOrigin, setDestination } from '../slices/navSlice';
-import NavOptions from '../components/NavOptions';
-import '../styles/global.css';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import React from "react";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { GOOGLE_MAPS_APIKEY } from "@env";
+import { useDispatch } from "react-redux";
+import { setDestination } from "../slices/navSlice";
+import { useNavigation } from "@react-navigation/native";
+// import NavFavourites from "./NavFavourites";
+import { Icon } from "react-native-elements";
 
-console.log("API Key:", GOOGLE_MAPS_APIKEY);
-
-const HomeScreen = () => {
+const NavigateCard = () => {
   const dispatch = useDispatch();
-
+  const navigation = useNavigation();
   return (
-    <SafeAreaView className="bg-white h-full">
-      <View className="p-7 pt-10">
-        <Image
-          style={{
-            height: 100,
-            width: 100,
-            resizeMode: 'contain',
-          }}
-          source={{
-            uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/2560px-Uber_logo_2018.svg.png',
-          }}
-        />
-
+    <SafeAreaView className="bg-white flex-1">
+      <Text className="text-center font-medium py-5 text-xl">Good Morning!</Text>
+      <View className="border-t border-gray-200 flex-shrink">
         <GooglePlacesAutocomplete
-          placeholder="Where from?"
+          placeholder="Where to?"
           onPress={(data, details = null) => {
             console.log('Selected place:', data, details);
             if (details?.geometry?.location) {
               dispatch(
-                setOrigin({
+                setDestination({
                   location: {
                     lat: details.geometry.location.lat,
                     lng: details.geometry.location.lng,
@@ -41,7 +35,7 @@ const HomeScreen = () => {
                   description: data.description,
                 })
               );
-              dispatch(setDestination(null));
+              navigation.navigate("RideOptions");
             }
           }}
           query={{
@@ -58,11 +52,16 @@ const HomeScreen = () => {
             textInput: { 
               fontSize: 18,
               height: 44,
+              backgroundColor: "#DDDDDF",
             },
             listView: {
               backgroundColor: 'white',
               elevation: 5,
               zIndex: 10,
+            },
+            textInputContainer: {
+              paddingHorizontal: 20,
+              paddingVertical: 0,
             },
           }}
           textInputProps={{
@@ -98,11 +97,27 @@ const HomeScreen = () => {
             </View>
           )}
         />
-
-        <NavOptions />
+        {/* <NavFavourites /> */}
       </View>
     </SafeAreaView>
   );
 };
 
-export default HomeScreen;
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+    paddingTop: 20,
+    flex: 0,
+  },
+  textInput: {
+    backgroundColor: "#DDDDDF",
+    borderRadius: 0,
+    fontSize: 18,
+  },
+  textInputContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 0,
+  },
+});
+
+export default NavigateCard;
