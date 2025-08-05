@@ -1,6 +1,6 @@
 import 'react-native-get-random-values'; 
 import './styles/global.css';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, } from 'react-native';
 import {Provider} from 'react-redux';
 import { store } from './store';
 import HomeScreen from './screens/HomeScreen'
