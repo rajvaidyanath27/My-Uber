@@ -48,11 +48,24 @@ const defaultRegion = {
     >
          {origin && destination && (
         <MapViewDirections
-          origin={origin.description}
-          destination={destination.description}
+          origin={{
+            latitude: origin.location.lat,
+            longitude: origin.location.lng,
+          }}
+          destination={{
+            latitude: destination.location.lat,
+            longitude: destination.location.lng,
+          }}
           apikey={GOOGLE_MAPS_APIKEY}
           strokeWidth={6}
           strokeColor="black"
+          onReady={(result) => {
+            console.log('Distance: ', result.distance);
+            console.log('Duration: ', result.duration);
+          }}
+          onError={(errorMessage) => {
+            console.log('MapViewDirections Error: ', errorMessage);
+          }}
         />
       )}
       {origin?.location && (
@@ -66,7 +79,7 @@ const defaultRegion = {
           identifier="origin"
         />
       )}
-      
+        
       {destination?.location && (
         <Marker
           coordinate={{
